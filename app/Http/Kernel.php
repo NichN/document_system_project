@@ -22,6 +22,13 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
+    protected $routeMiddleware = [
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'upload.permission' => \App\Http\Middleware\UploadPermissionMiddleware::class,
+    ];
+
+
+
 
     /**
      * The application's route middleware groups.
