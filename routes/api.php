@@ -16,25 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 // Protected Routes
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin-only', function () {
-        return response()->json(['message' => 'Welcome, Admin!']);
-    });
-});
+Route::middleware('auth:api')->post('/documents/upload', [DocumentController::class, 'upload']);
+// Route::post('/documents/upload', [DocumentController::class, 'upload'])->middleware('auth.jwt');
 
-Route::middleware(['auth', 'upload.permission'])->group(function () {
-    Route::post('/upload', [DocumentController::class, 'upload']);
-});
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/files', action: [DocumentController::class, 'index']);    // List all files
-    Route::get('/files/{id}/download', [DocumentController::class, 'download']); // Download a file
-});
+
+
+

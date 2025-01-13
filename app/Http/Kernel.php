@@ -25,7 +25,12 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'upload.permission' => \App\Http\Middleware\UploadPermissionMiddleware::class,
+
+        'permission' => \App\Http\Middleware\CheckPermission::class,
+        'auth.jwt' => \PHPOpenSourceSaver\JWTAuth\Http\Middleware\Authenticate::class,
     ];
+
+
 
 
 
@@ -44,12 +49,12 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
     ];
 
     /**

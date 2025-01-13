@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/generate-token', function () {
+    $user = User::find(1); // Replace with the ID of the user you want to generate a token for
+    $token = $user->createToken('API Token')->accessToken;
+    return ['token' => $token];
 });
