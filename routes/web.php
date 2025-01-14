@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\cardcontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',function(){
+    return view('Student.homepage');
 });
+Route::get('/login',function(){
+    return view('Student.loginform');
+})->name('login');
+/*Route::get('/document',function(){
+    return view('Student.Document');
+})->name('document');*/
+Route::get('/document', [cardcontroller::class, 'showcard'])->name('document');
