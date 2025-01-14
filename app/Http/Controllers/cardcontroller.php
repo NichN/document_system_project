@@ -9,14 +9,58 @@ class cardcontroller extends Controller
     public function showcard(){
         $card = [
             [
-                'image' => asset('image/subc.png'),
-                'title' => 'WORDPRESS',
-                'name'=> 'Read'
+                'title' => 'SE',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
             
             ],
             [
-                'image' => asset('image/Norton.png'),
+                'title' => 'Project Managemt',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
+            ],
+            [
+                'title' => 'HTML',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
+            
+            ],
+            [
                 'title' => 'WORDPRESS',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
+            
+            ],
+            [
+                'title' => 'SE',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
+            
+            ],
+            [
+                'title' => 'WORDPRESS',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
+            
+            ],
+            [
+                'title' => 'WORDPRESS',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
+            
+            ],
+            [
+                'title' => 'WORDPRESS',
+                'description'=> 'A systematic approach to the analysis, design,
+                                implementation and maintenance of software.',
+                'teacher'=>'sry chrea'
             
             ]
         ];

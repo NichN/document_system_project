@@ -19,7 +19,14 @@ Route::get('/',function(){
 Route::get('/login',function(){
     return view('Student.loginform');
 })->name('login');
-/*Route::get('/document',function(){
-    return view('Student.Document');
-})->name('document');*/
 Route::get('/document', [cardcontroller::class, 'showcard'])->name('document');
+Route::get('/document/detail',function(){
+    return view('Student.document_detail');
+})->name('detail');
+
+Route::get('/admin',function(){
+    return view('Admin.dashboard');
+});
+Route::get('/document/add',function(){
+    return view('Admin.add');
+})->name('create_document');
