@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\cardcontroller;
+=======
+use App\Models\User;
+
+>>>>>>> 0ebaae45de2f70d19200c58354a099040d655571
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +18,7 @@ use App\Http\Controllers\cardcontroller;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/',function(){
     return view('Student.homepage');
 });
@@ -30,3 +36,15 @@ Route::get('/admin',function(){
 Route::get('/document/add',function(){
     return view('Admin.add');
 })->name('create_document');
+=======
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/generate-token', function () {
+    $user = User::find(1); // Replace with the ID of the user you want to generate a token for
+    $token = $user->createToken('API Token')->accessToken;
+    return ['token' => $token];
+});
+>>>>>>> 0ebaae45de2f70d19200c58354a099040d655571
