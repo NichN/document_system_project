@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ Route::get('/', function () {
     return view('Student.homepage');
 });
 Route::get('/login', function () {
-    return view('Student.loginform');
+    return view(view: 'Student.loginform');
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -53,6 +54,10 @@ Route::get('/adminlist', function () {
     return view('Admin.adminlist');
 })->name('adminlist');
 
+
+
 Route::get('/create_admin', function () {
     return view('Admin.add_admin');
-})->name('create_admin');
+})->name('create_admin_form');
+
+Route::post('/create_admin', [AdminController::class, 'store'])->name('create_admin');

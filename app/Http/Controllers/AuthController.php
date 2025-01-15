@@ -21,10 +21,15 @@ class AuthController extends Controller
                 'email' => 'The provided credentials do not match our records.',
             ]);
         }
+        $user = Auth::user();
+        $token = $user->createToken('API Token')->accessToken;
 
         $request->session()->regenerate();
+        if ($request->expectsJson()) {
+            return response()->json(['token' => $token], 200);
+        }
 
-        return redirect()->intended('dashboard');
+        return redirect()->intended('/');
     }
 
 

@@ -44,24 +44,28 @@
                     body: JSON.stringify({ email, password }) // Send JSON body
                 });
 
+                const loginData = await response.json(); // Read response body once
+
+                // Check if the response is successful
                 if (!response.ok) {
-                    // Parse the error response
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || "Failed to login.");
+                    throw new Error(loginData.message || "Failed to login.");
                 }
 
-                const data = await response.json();
-                console.log("Login successful:", data);
+                // Store the authentication token
 
-                // Redirect or handle success
+                console.log("Login successful:", loginData);
+                localStorage.setItem('authToken', loginData.token);
+
                 alert("Login successful!");
-                window.location.href = '/';
+                window.location.href = '/'; // Redirect after successful login
             } catch (error) {
                 console.error("Error during login:", error);
                 alert("Login failed: " + error.message);
             }
         });
     </script>
+
+
 </body>
 
 </html>
