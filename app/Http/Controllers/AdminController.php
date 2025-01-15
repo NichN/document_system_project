@@ -43,4 +43,29 @@ class AdminController extends Controller
 
         return response()->json(['message' => 'Admin created successfully', 'user' => $user], 201);
     }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('Admin.edit_user', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'role' => 'required|string|in:Super Admin,Admin,Teacher,Student,Guest',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => $request->role,
+        ]);
+
+        return redirect()->route('adminlist')->with('success', 'User updated successfully.');
+    }
+
 }

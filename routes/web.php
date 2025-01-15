@@ -61,3 +61,7 @@ Route::get('/create_admin', function () {
 })->name('create_admin_form');
 
 Route::post('/create_admin', [AdminController::class, 'store'])->name('create_admin');
+
+
+Route::get('/edit_user/{id}', [AdminController::class, 'edit'])->name('edit_user');
+Route::put('/edit_user/{id}', [AdminController::class, 'update'])->name('update_user');

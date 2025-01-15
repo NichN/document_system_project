@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Protected Routes
 Route::middleware('auth:api')->post('/documents/upload', [DocumentController::class, 'upload']);
+Route::get('/auth/get-users', [AdminController::class, 'index']);
 // Route::post('/documents/upload', [DocumentController::class, 'upload'])->middleware('auth.jwt');
 
 
