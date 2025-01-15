@@ -13,10 +13,11 @@
     <nav class="navbar">
         <img class="img-logo" src="{{ asset('image/Norton.png') }}" alt="Logo">
         <div id="navbar_setting">
-                <li><a href="#">Teacher</a></li>
-                <li><a href="#">Admin</a></li>
-                <li><a href="#">Setting</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href={{route('teacherlist')}}><i class="fas fa-chalkboard-teacher"></i> Teacher</a></li>
+                <li><a href={{route('adminlist')}}><i class="fas fa-user-shield"></i> Admin</a></li>
+                <li><a href={{route('profile')}}><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#" class="logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+              
         </div>
         <form class="navbar-form navbar-right">
             <a class="st-button" onclick="Navigation()">
@@ -27,7 +28,6 @@
     <div class="container">
         @yield('content')
     </div>
-
     <footer>
         <p class="text-center">© 2025 Norton University</p>
     </footer>

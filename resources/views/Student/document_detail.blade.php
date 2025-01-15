@@ -18,5 +18,41 @@
         </a>
       </form>
   </nav>
+  <div class="container-detail">
+    <a href="{{ route('document') }}"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    
+    <h1 class="text-center">Software Engineering</h1>
+    
+    <img src="{{ asset('image/doc.png') }}" alt="Image description" class="img-responsive center-block">
+    <p class="text-center">
+      This page provides details about the selected document. Explore the content, and feel free to leave your comments below.
+  </p>
+  <div class="comment-section">
+    <form method="POST">
+        @csrf
+        <label for="comment">Your Comment:</label>
+        <div class="form-group" style="display: flex">
+            <input class="form-control" id="comment" name="comment" placeholder="Write your comment here..." required style="max-width: 400px;">
+
+        <button type="submit" class="btn btn-link" style="padding: 0; background: none; border: none;">
+            <i class="fas fa-paper-plane" style="font-size: 18px; color: green; margin-left:10px"></i>
+        </button>
+      </div>
+    </form>
+</div>
+
+    
+   
+    {{-- <div class="comments-display">
+        <h3>Comments</h3>
+        @foreach($comments as $comment)
+            <div class="comment-item">
+                <p><strong>User:</strong> {{ $comment->user_name ?? 'Anonymous' }}</p>
+                <p>{{ $comment->content }}</p>
+                <hr>
+            </div>
+        @endforeach
+    </div> --}}
+</div>
 </body>
 </html>

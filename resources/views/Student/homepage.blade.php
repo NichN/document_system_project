@@ -45,7 +45,7 @@
     </div>
 </div>
     <div class="contact_container">
-        <h2 style="text-align: center; color: #0c7beb; font-size: 40px; margin-top: 20px;">School Location</h2>
+        <h2 style="text-align: center; color: #0c7beb; font-size: 40px; margin-top: 20px;">Location</h2>
         <p>Keo Chenda St, Phnom Penh 12000</p>
         <a name="contact"></a>
         <iframe width="80%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.4884007138176!2d104.92760177934565!3d11.588487300000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310953fd9f9a51e9%3A0xc26eafcd2ed5ca29!2sNorton%20University!5e0!3m2!1sen!2skh!4v1736494188217!5m2!1sen!2skh"></iframe>

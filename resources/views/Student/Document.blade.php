@@ -46,17 +46,12 @@
                         <i class="far fa-comment" onclick="toggleCommentForm()"></i>
                         <p style="color:brown"> by:{{$item['teacher']}}</p>
                     </div>
-                    <div id="commentForm" style="display:none">
+                   {{-- <div id="commentForm" style="display:none">
                       <form action="Document.blade.php" method="POST">
                           <input name="comment" placeholder="Write your comment here..." required></input><br>
                           <input type="submit" value="done"></input>
                       </form>
-                  </div>
-                  <?php
-                    if(isset($_POST['submit'])){
-                      $comment=$_POST('comment');
-                    }
-                 ?>
+                  </div> --}}
                   <div class="overlay">
                     <a href="{{route('detail')}}">
                       <button type="button" class="btn-primary btn-block">View</button>
@@ -77,7 +72,6 @@
     </div>
     <p style="margin-top: 20px;">Copyright © Norton University</p>
 </footer>
-<script src={{ asset('js/cmtform.js')}}></script>
 </body>
 </html>
 

@@ -27,6 +27,27 @@ Route::get('/document/detail', function () {
 Route::get('/admin', function () {
     return view('Admin.dashboard');
 });
+
 Route::get('/document/add', function () {
     return view('Admin.add');
 })->name('create_document');
+
+Route::get('/profile', function () {
+    return view('Admin.profile');
+})->name('profile');
+
+Route::get('/teacherlist', function () {
+    return view('Admin.teacherlist');
+})->name('teacherlist');
+
+Route::get('/create_teacher',function(){
+    return view('Admin.add_teacher');
+})->name('create_teacher');
+
+Route::get('/adminlist', function () {
+    return view('Admin.adminlist');
+})->name('adminlist');
+
+Route::get('/create_admin',function(){
+    return view('Admin.add_admin');
+})->name('create_admin');
