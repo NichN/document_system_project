@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,9 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('Student.loginform');
 })->name('login');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
 Route::get('/document', [cardcontroller::class, 'showcard'])->name('document');
 Route::get('/document/detail', function () {
     return view('Student.document_detail');
@@ -32,6 +36,7 @@ Route::get('/document/add', function () {
     return view('Admin.add');
 })->name('create_document');
 
+
 Route::get('/profile', function () {
     return view('Admin.profile');
 })->name('profile');
@@ -40,7 +45,7 @@ Route::get('/teacherlist', function () {
     return view('Admin.teacherlist');
 })->name('teacherlist');
 
-Route::get('/create_teacher',function(){
+Route::get('/create_teacher', function () {
     return view('Admin.add_teacher');
 })->name('create_teacher');
 
@@ -48,6 +53,6 @@ Route::get('/adminlist', function () {
     return view('Admin.adminlist');
 })->name('adminlist');
 
-Route::get('/create_admin',function(){
+Route::get('/create_admin', function () {
     return view('Admin.add_admin');
 })->name('create_admin');
