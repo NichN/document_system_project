@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -25,11 +26,18 @@
             </a>
         </form>
     </nav>
+
     <div class="container">
         @yield('content')
     </div>
     <footer>
-        <p class="text-center">© 2025 Norton University</p>
+        <div class="info">
+            <a><i class="fa-brands fa-telegram"></i></a>
+            <a><i class="fa-brands fa-instagram"></i></a>
+            <a><i class="fa-brands fa-facebook"></i></a>
+            <a><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p style="margin-top: 20px;">Copyright © Norton University</p>
     </footer>
     <script src="{{ asset('js/navigation.js') }}"></script>
 </body>

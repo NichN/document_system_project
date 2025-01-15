@@ -3,7 +3,7 @@
 @section('title', 'Create Product')
 
 @section('content')
-    <h1>Create Product</h1>
+    <h1>Create Document</h1>
     <form  method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -12,6 +12,10 @@
         </div>
         <div class="form-group">
             <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Type</label>
             <textarea class="form-control" id="description" name="description" required></textarea>
         </div>
         <div class="form-group">
