@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DocumentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,9 +33,10 @@ Route::get('/admin', function () {
     return view('Admin.dashboard');
 });
 
-Route::get('/document/add', function () {
+
+/*Route::get('/document/add', function () {
     return view('Admin.add');
-})->name('create_document');
+})->name('create_document');*/
 
 
 Route::get('/profile', function () {
@@ -56,3 +58,14 @@ Route::get('/adminlist', function () {
 Route::get('/create_admin', function () {
     return view('Admin.add_admin');
 })->name('create_admin');
+
+/*Route::get('/admin', [DocumentController::class, 'index'])->name('documents');
+Route::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');
+Route::post('/admin', [DocumentController::class, 'store'])->name('store_document');
+Route::get('/documents/upload', [DocumentController::class, 'uploadDocument'])->name('uploadDocument');
+Route::post('/admin', [DocumentController::class, 'getDocuments'])->name('documents');*/
+
+Route::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');
+Route::post('/documents', [DocumentController::class, 'store'])->name('store_document');
+Route::get('/documents', [DocumentController::class, 'getDocuments'])->name('documents');
+

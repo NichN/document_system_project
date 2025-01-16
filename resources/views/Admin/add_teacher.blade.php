@@ -15,7 +15,7 @@
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter teacher's email" required>
         </div>
         <div class="form-group">
-            <label for="department">Department</label>
+            <label for="department">Password</label>
             <input type="text" class="form-control" id="department" name="department" placeholder="Enter teacher's department" required>
         </div>
         <div class="form-group">

@@ -55,12 +55,6 @@
           <i class="far fa-comment" onclick="toggleCommentForm()"></i>
           <p style="color:brown"> by:{{$item['teacher']}}</p>
         </div>
-        {{-- <div id="commentForm" style="display:none">
-          <form action="Document.blade.php" method="POST">
-          <input name="comment" placeholder="Write your comment here..." required></input><br>
-          <input type="submit" value="done"></input>
-          </form>
-        </div> --}}
         <div class="overlay">
           <a href="{{route('detail')}}">
           <button type="button" class="btn-primary btn-block">View</button>

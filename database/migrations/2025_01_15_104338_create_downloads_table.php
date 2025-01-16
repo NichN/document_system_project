@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('downloads', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->integer('document_id')->index('document_id');
+            $table->integer('user_id')->nullable()->index('user_id');
+            $table->timestamp('downloaded_at')->nullable()->useCurrent();
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('downloads');
     }
 };

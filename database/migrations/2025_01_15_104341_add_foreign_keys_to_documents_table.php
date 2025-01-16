@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_permissions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('documents', function (Blueprint $table) {
+            $table->foreign(['uploaded_by'], 'documents_ibfk_1')->references(['id'])->on('users')->onUpdate('restrict')->onDelete('set null');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_permissions');
+        Schema::table('documents', function (Blueprint $table) {
+            $table->dropForeign('documents_ibfk_1');
+        });
     }
 };

@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ratings', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('id', true);
+            $table->integer('document_id')->index('document_id');
+            $table->integer('user_id')->index('user_id');
+            $table->integer('rating')->nullable();
+            $table->timestamp('created_at')->nullable()->useCurrent();
         });
     }
 
