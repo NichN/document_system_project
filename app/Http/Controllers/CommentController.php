@@ -2,27 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Document;
 use App\Models\Comment;
-
+use App\Models\Document;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function show($documentId)
+    // Get comments for a specific document
+    public function index(Request $request)
     {
-        // Retrieve the document details
+        $documentId = $request->query('documentId');
         $document = Document::find($documentId);
 
-        // If the document does not exist, redirect with an error message
         if (!$document) {
-            return redirect()->route('home')->with('error', 'Document not found.');
+            return response()->json(['message' => 'Document not found.'], 404);
         }
 
-        // Retrieve comments related to the document, including user details
         $comments = Comment::where('document_id', $documentId)->with('user')->get();
 
-        // Pass the data to the view
-        return view('document-detail', compact('document', 'comments'));
+        return response()->json(['comments' => $comments]);
     }
 
+    // Store a new comment for a specific document
+    public function store(Request $request, $documentId)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'comment' => 'required|string|max:255',
+        ]);
+
+        // Create a new comment
+        $comment = new Comment();
+        $comment->document_id = $documentId;
+        $comment->user_id = auth()->id();  // Assuming the user is logged in
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return response()->json(['message' => 'Comment posted successfully!', 'comment' => $comment]);
+    }
 }
