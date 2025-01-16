@@ -18,11 +18,17 @@
     <img class="img-logo" src="{{asset('image/Norton.png')}}" alt="Logo">
     <form class="navbar-form navbar-right">
       @if (Auth::check())
+      <!-- Display username if user is logged in -->
       <a href="{{ route('profile') }}" class="btn"
-      style="margin-right:20px; color: white; font-size:160%;">{{Auth::user()->username}}</a>
-
+      style="margin-right:20px; color: white; font-size:160%;">{{ Auth::user()->username }}</a>
+      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+      class="btn" style="color: white;">Logout</a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+      </form>
     @else
-      <a href="{{route('login')}}">
+      <!-- Display login button if no user is logged in -->
+      <a href="{{ route('login') }}">
       <button type="button" class="btn" style="margin-right:20px">Login</button>
       </a>
     @endif

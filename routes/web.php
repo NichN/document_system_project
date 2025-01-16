@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
+
 use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,13 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware('auth:api')->get('/auth/user', [AuthController::class, 'getUser']);
+
 
 Route::get('/document', [cardcontroller::class, 'showcard'])->name('document');
+Route::get('/documents/{documentId}', [CommentController::class, 'show'])->name('document.show');
+
 Route::get('/document/detail', function () {
     return view('Student.document_detail');
 })->name('detail');
