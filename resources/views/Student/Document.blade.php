@@ -42,9 +42,11 @@
     <h1 class="image-title">Document Feature</h1>
   </div>
   <form class="navbar-form navbar-left" role="search">
-    <div class="form-group">
+  <input type="text" id="searchBox" class="form-control" placeholder="Search documents" onkeyup="searchDocuments()">
+
+    <!-- <div class="form-group">
       <input type="text" class="form-control" placeholder="Search">
-    </div>
+    </div> -->
     <a>
       <button type="button" class="btn btn-primary">Search</button>
     </a>
@@ -52,26 +54,50 @@
   <div class="container">
     <div class="row">
       @foreach($card as $item)
-      <div class="col-md-3">
-      <div class="card">
-        <div class="card-body mt-3">
-        <h4 class="card-title text-primary text-center"><strong>{{ $item['title'] }}</strong></h4>
-        <p class="card-text text-center">{{ $item['description'] }}</p>
-        <div style="margin-left: 10px" class="bootom-text">
-          <i class="far fa-comment" onclick="toggleCommentForm()"></i>
-          <p style="color:brown"> by:{{$item['teacher']}}</p>
-        </div>
-        <div class="overlay">
-          <a href="{{route('detail')}}">
-          <button type="button" class="btn-primary btn-block">View</button>
-          </a>
-        </div>
+      <div class="col-md-3" data-title="{{ $item['title'] }}" data-description="{{ $item['description'] }}">
+        <div class="card">
+          <div class="card-body mt-3">
+            <h4 class="card-title text-primary text-center"><strong>{{ $item['title'] }}</strong></h4>
+            <p class="card-text text-center">{{ $item['description'] }}</p>
+            <div style="margin-left: 10px" class="bootom-text">
+              <i class="far fa-comment" onclick="toggleCommentForm()"></i>
+              <p style="color:brown"> by: {{ $item['teacher'] }}</p>
+            </div>
+            <div class="overlay">
+              <a href="{{ route('detail') }}">
+                <button type="button" class="btn-primary btn-block">View</button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      </div>
+  
     @endforeach
     </div>
   </div>
+  <script>
+    function searchDocuments() {
+  // Get the search input value
+  const query = document.getElementById('searchBox').value.toLowerCase();
+
+  // Get all document cards
+  const cards = document.querySelectorAll('.col-md-3');
+
+  // Loop through each card
+  cards.forEach(card => {
+    const title = card.getAttribute('data-title').toLowerCase();
+    const description = card.getAttribute('data-description').toLowerCase();
+
+    // Check if the search query matches the title or description
+    if (title.includes(query) || description.includes(query)) {
+      card.style.display = ''; // Show the card
+    } else {
+      card.style.display = 'none'; // Hide the card
+    }
+  });
+}
+
+  </script>
   <footer>
     <div class="info">
       <a><i class="fa-brands fa-telegram"></i></a>
