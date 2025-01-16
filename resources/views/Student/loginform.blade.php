@@ -27,33 +27,30 @@
 
     <script>
         document.getElementById("loginForm").addEventListener("submit", async function (event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); 
 
-            // Get form data
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
             try {
-                // Send a POST request to the external API
-                const response = await fetch("http://127.0.0.1:3000/api/auth/login", {
+                const response = await fetch("http://localhost:8000/api/auth/login", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json", // Set content type
-                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value // Laravel CSRF token
+                        "Content-Type": "application/json", 
+                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
                     },
-                    body: JSON.stringify({ email, password }) // Send JSON body
+                    body: JSON.stringify({ email, password })
                 });
 
+                const loginData = await response.json();
+
                 if (!response.ok) {
-                    // Parse the error response
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || "Failed to login.");
+                    throw new Error(loginData.message || "Failed to login.");
                 }
 
-                const data = await response.json();
-                console.log("Login successful:", data);
+                console.log("Login successful:", loginData);
+                localStorage.setItem('authToken', loginData.token);
 
-                // Redirect or handle success
                 alert("Login successful!");
                 window.location.href = '/';
             } catch (error) {
@@ -63,5 +60,4 @@
         });
     </script>
 </body>
-
 </html>

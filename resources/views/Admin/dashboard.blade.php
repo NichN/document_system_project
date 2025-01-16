@@ -28,8 +28,9 @@
 @section('scripts')
     <script>
         async function loadDocuments() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjYsInJvbGUiOiJTdXBlciBBZG1pbiIsImlhdCI6MTczNzAwMzQ3OSwiZXhwIjoxNzM3MDA3MDc5fQ.WbpH4mSy2WCwsoHR-L2QNukbqcsOYp4OphcvaS6D3yI'; 
-    const apiUrl = 'http://127.0.0.1:3000/api/documents';
+            localStorage.getItem('authToken');
+
+    const apiUrl = 'http://localhost:8000/api/documents';
 
     try {
         const response = await fetch(apiUrl, {

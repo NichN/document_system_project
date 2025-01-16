@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,7 @@ Route::get('/', function () {
     return view('Student.homepage');
 });
 Route::get('/login', function () {
-    return view('Student.loginform');
+    return view(view: 'Student.loginform');
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -55,6 +56,8 @@ Route::get('/adminlist', function () {
     return view('Admin.adminlist');
 })->name('adminlist');
 
+
+
 Route::get('/create_admin', function () {
     return view('Admin.add_admin');
 })->name('create_admin');
@@ -65,7 +68,22 @@ Route::post('/admin', [DocumentController::class, 'store'])->name('store_documen
 Route::get('/documents/upload', [DocumentController::class, 'uploadDocument'])->name('uploadDocument');
 Route::post('/admin', [DocumentController::class, 'getDocuments'])->name('documents');*/
 
-Route::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');
+/*Route::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');
 Route::post('/documents', [DocumentController::class, 'store'])->name('store_document');
-Route::get('/documents', [DocumentController::class, 'getDocuments'])->name('documents');
+Route::get('/documents', [DocumentController::class, 'getDocuments'])->name('documents');*/
 
+// For displaying the document list (dashboard)
+Route::get('/documents', [DocumentController::class, 'index'])->name('document_list');
+
+// For creating a new document
+Route::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');
+
+// For uploading the document (POST)
+Route::post('/documents/upload', [DocumentController::class, 'store'])->name('store_document');
+
+
+
+
+Route::post('/create_admin', [AdminController::class, 'store'])->name('create_admin');
+Route::get('/edit_user/{id}', [AdminController::class, 'edit'])->name('edit_user');
+Route::put('/edit_user/{id}', [AdminController::class, 'update'])->name('update_user');
