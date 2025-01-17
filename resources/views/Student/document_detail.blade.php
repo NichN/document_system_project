@@ -37,6 +37,11 @@
     <p class="text-center">{{ $document->description }}</p>
     <p class="text-center">by: {{ $document->uploader->username}}</p>
 
+    <div class="text-center">
+      <button class="btn btn-primary mt-3" onclick="downloadDocument({{ $document->id }})">Download</button>
+    </div>
+
+
     <div class="comment-section">
       <h3>Leave a Comment:</h3>
       <form id="commentForm">
@@ -221,6 +226,34 @@
         loadComments(); // Reload comments after deletion
       } catch (error) {
         console.error('Error deleting comment:', error);
+      }
+    }
+
+    async function downloadDocument(documentId) {
+      const apiUrl = `http://127.0.0.1:3000/api/documents/${documentId}/download`;
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem("authToken")}` // Include the token in the Authorization header
+          }
+        });
+
+        if (response.ok) {
+          const blob = await response.blob();
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = 'document.pdf'; // Provide a default name for download
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } else {
+          throw new Error('Failed to download document');
+        }
+      } catch (error) {
+        console.error('Error downloading document:', error);
+        alert('Failed to download the document.');
       }
     }
 
