@@ -2,92 +2,38 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\Document;
+=======
+use Illuminate\Support\Facades\Http;
+use Psy\Readline\Hoa\Console;
+>>>>>>> 4ff7031e84b6924b2d379bbe62158744c8f9252b
 
 class cardcontroller extends Controller
 {
-    public function showcard()
+
+
+    public function showCard()
     {
-        $card = [
-            [
-                'id' => 1,
-                'title' => 'SE',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
+        try {
+            // Fetch data from the external API
+            $response = Http::get('http://127.0.0.1:3000/api/documents');
 
-            ],
-            [
-                'id' => 2,
-                'title' => 'Project Managemt',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-            ],
-            [
-                'id' => 3,
-                'title' => 'HTML',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-
-            ],
-            [
-                'id' => 4,
-                'title' => 'WORDPRESS',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-
-            ],
-            [
-                'id' => 5,
-                'title' => 'SE',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-
-            ],
-            [
-                'id' => 6,
-                'title' => 'WORDPRESS',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-
-            ],
-            [
-                'id' => 7,
-                'title' => 'WORDPRESS',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-
-            ],
-            [
-                'id' => 8,
-                'title' => 'WORDPRESS',
-                'description' => 'A systematic approach to the analysis, design,
-                                implementation and maintenance of software.',
-                'teacher' => 'sry chrea'
-
-            ]
-        ];
-        return view('Student.Document', compact('card'));
-    }
-
-    public function show($documentId)
-    {
-        // Retrieve the document details
-        $document = Document::find($documentId);
-
-        // If the document does not exist, return an error or redirect
-        if (!$document) {
-            return redirect()->route('document.index')->with('error', 'Document not found.');
+            if ($response->ok()) {
+                $documents = $response->json();
+                \Log::info('Documents fetched successfully:', $documents); // Debugging log
+            } else {
+                // Log error and set empty array
+                \Log::error('Failed to fetch documents. Status: ' . $response->status());
+                $documents = [];
+            }
+        } catch (\Exception $e) {
+            // Log exception and provide fallback data
+            \Log::error('Error fetching documents: ' . $e->getMessage());
+            $documents = [];
         }
 
-        // Pass the document to the view
-        return view('document-detail', compact('document'));
+        return view('Student.Document', compact('documents'));
     }
 
 }
