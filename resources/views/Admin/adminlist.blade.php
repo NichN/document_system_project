@@ -5,7 +5,7 @@
 
 @section('content')
 <h1>Admin List</h1>
-<a href="{{ route('create_admin') }}" class="btn btn-primary">Add Admin</a>
+<a href="{{ route('create_admin') }}" class="btn btn-primary">Create Document</a>
 <table class="table table-striped">
     <thead>
         <tr>

@@ -17,12 +17,12 @@
     <nav class="navbar">
         <img class="img-logo" src="{{ asset('image/Norton.png') }}" alt="Logo">
         <div id="navbar_setting">
-            <script>
+             <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     const token = localStorage.getItem('authToken');
 
                     if (token) {
-                        fetch("http://127.0.0.1:3000/api/auth/user", {
+                        fetch("http://localhost:8000/api/auth/get-users", {
                             method: "GET",
                             headers: {
                                 "Authorization": `Bearer ${token}`,

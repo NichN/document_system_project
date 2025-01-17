@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Models;
-
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Rating;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-
-
     use HasFactory;
-
     protected $table = 'documents';
     protected $fillable = [
         'title',

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,21 +30,11 @@ Route::middleware('auth:api')->get('/auth/user', [AuthController::class, 'getUse
 
 
 Route::get('/document', [cardcontroller::class, 'showcard'])->name('document');
-Route::get('/documents/{documentId}', [CommentController::class, 'show'])->name('document.show');
+//Route::get('/documents/{documentId}', [CommentController::class, 'show'])->name('document.show');
 
 Route::get('/document/detail', function () {
     return view('Student.document_detail');
 })->name('detail');
-
-Route::get('/admin', function () {
-    return view('Admin.dashboard');
-});
-
-
-/*Route::get('/document/add', function () {
-    return view('Admin.add');
-})->name('create_document');*/
-
 
 Route::get('/profile', function () {
     return view('Admin.profile');
@@ -77,19 +69,24 @@ Route::post('/documents', [DocumentController::class, 'store'])->name('store_doc
 Route::get('/documents', [DocumentController::class, 'getDocuments'])->name('documents');*/
 
 // For displaying the document list (dashboard)
-Route::get('/documents', [DocumentController::class, 'index'])->name('document_list');
+//Route::get('/documents', [DocumentController::class, 'index'])->name('document_list');
 
 // For creating a new document
-Route::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');
+/**oute::get('/documents/create', [DocumentController::class, 'create'])->name('create_document');*/
 
 // For uploading the document (POST)
-Route::post('/documents/upload', [DocumentController::class, 'store'])->name('store_document');
-
-
-
-
-Route::post('/create_admin', [AdminController::class, 'store'])->name('create_admin');
+Route::get('/new_document',[DocumentController::class, 'create'])->name('new_document');
+Route::get('/create_admin', [AdminController::class, 'store'])->name('create_admin');
 Route::get('/edit_user/{id}', [AdminController::class, 'edit'])->name('edit_user');
 Route::put('/edit_user/{id}', [AdminController::class, 'update'])->name('update_user');
-
 Route::post('/document/detail/{documentId}', [CommentController::class, 'store'])->name('comment.store');
+
+Route::get('/create_document', [DocumentController::class, 'store'])->name('upload_document');
+Route::get('/edit_document/{id}', [DocumentController::class, 'edit'])->name('edit_document');
+Route::put('/edit_document/{id}', [DocumentController::class, 'update'])->name('update_document');
+Route::delete('/documents_delete/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+
+Route::get('/dashboard', function () {
+    return view('Admin.dashboard');
+})->name('document_dashboard');
+

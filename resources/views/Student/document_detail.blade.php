@@ -58,7 +58,7 @@
     // Load comments for the document
     async function loadComments() {
       const documentId = 2; // The document ID you're interested in
-      const apiUrl = `http://127.0.0.1:3000/api/comments/${documentId}`;
+      const apiUrl = `http://localhost:8000/api/comments/${documentId}`;
       const authToken = localStorage.getItem('authToken');
 
       if (!authToken) {
@@ -139,7 +139,7 @@
       }
 
       const documentId = 2; // The document ID you're submitting the comment for
-      const apiUrl = 'http://127.0.0.1:3000/api/comments';
+      const apiUrl = 'http://localhost:8000/api/comments';
 
       // Get the JWT token from localStorage or sessionStorage
       const token = localStorage.getItem('authToken'); // or use sessionStorage
@@ -177,7 +177,7 @@
       const newComment = prompt('Edit your comment:');
       if (!newComment) return;
 
-      const apiUrl = `http://127.0.0.1:3000/api/comments/${commentId}`;
+      const apiUrl = `http://localhost:8000/api/comments/${commentId}`;
       const documentId = 2;
 
       try {
@@ -204,7 +204,7 @@
     async function deleteComment(commentId) {
       if (!confirm('Are you sure you want to delete this comment?')) return;
 
-      const apiUrl = `http://127.0.0.1:3000/api/comments/${commentId}`;
+      const apiUrl = `http://localhost:8000/api/comments/${commentId}`;
 
       try {
         const response = await fetch(apiUrl, {

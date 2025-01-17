@@ -69,7 +69,7 @@
             const email = document.getElementById("email").value;
             const role = document.querySelector('input[name="role"]:checked').value;
 
-            fetch(`http://127.0.0.1:3000/api/auth/edit/${userId}`, {
+            fetch(`http://localhost:8000/api/auth/edit/${userId}`, {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
