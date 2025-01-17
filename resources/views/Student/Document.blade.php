@@ -262,31 +262,71 @@
       <button type="button" class="btn btn-primary">Search</button>
     </a>
   </form>
-  <div class="container">
-    <div class="row">
-      @foreach($card as $item)
-      <div class="col-md-3" data-title="{{ $item['title'] }}" data-description="{{ $item['description'] }}">
-      <div class="card">
-        <div class="card-body mt-3">
-        <h4 class="card-title text-primary text-center"><strong>{{ $item['title'] }}</strong></h4>
-        <p class="card-text text-center">{{ $item['description'] }}</p>
-        <div style="margin-left: 10px" class="bootom-text">
-          <i class="far fa-comment" onclick="toggleCommentForm()"></i>
-          <p style="color:brown"> by: {{ $item['teacher'] }}</p>
-        </div>
-        <div class="overlay">
-          <a href="{{ route('detail') }}">
-          <button type="button" class="btn-primary btn-block">View</button>
-          </a>
-        </div>
-        </div>
-      </div>
-      </div>
-
-    @endforeach
+  <div class="container mt-5">
+    <h1 class="text-center">Document Viewer</h1>
+    <div id="documentContainer" class="row">
+      <!-- Documents will be dynamically loaded here -->
     </div>
   </div>
+
+
+
   <script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      fetchDocuments();
+    });
+
+    function fetchDocuments() {
+      const token = localStorage.getItem('authToken');
+      fetch("http://127.0.0.1:3000/api/documents", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch documents");
+          }
+          return response.json();
+        })
+        .then(data => {
+          const container = document.querySelector('#documentContainer');
+          if (!data || data.length === 0) {
+            container.innerHTML = `<p class="text-center">No documents available at the moment.</p>`;
+            return;
+          }
+          renderDocuments(data, container);
+        })
+        .catch(error => {
+          console.error("Error fetching documents:", error);
+          document.querySelector('#documentContainer').innerHTML = `
+        <p class="text-center text-danger">Failed to load documents. Please try again later.</p>`;
+        });
+    }
+
+    function renderDocuments(documents, container) {
+      container.innerHTML = ""; // Clear previous content
+      documents.forEach(doc => {
+        container.innerHTML += `
+      <div class="col-md-3" data-title="${doc.title.toLowerCase()}" data-description="${doc.description.toLowerCase()}">
+        <div class="card">
+          <div class="card-body mt-3">
+            <h4 class="card-title text-primary text-center"><strong>${doc.title}</strong></h4>
+            <p class="card-text text-center">${doc.description}</p>
+            <p class="text-center" style="color:brown">by: ${doc.created_by}</p>
+            <a href="/document/detail/${doc.id}" target="_self">
+              <button type="button" class="btn btn-primary btn-block">View</button>
+            </a>
+          </div>
+        </div>
+      </div>`;
+      });
+    }
+
     function searchDocuments() {
       // Get the search input value
       const query = document.getElementById('searchBox').value.toLowerCase();

@@ -96,3 +96,4 @@ Route::get('/edit_user/{id}', [AdminController::class, 'edit'])->name('edit_user
 Route::put('/edit_user/{id}', [AdminController::class, 'update'])->name('update_user');
 
 Route::post('/document/detail/{documentId}', [CommentController::class, 'store'])->name('comment.store');
+Route::get('/document/detail/{documentId}', [DocumentController::class, 'show'])->name('document.detail');

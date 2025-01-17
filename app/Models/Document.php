@@ -22,7 +22,7 @@ class Document extends Model
 
     public function uploader()
     {
-        return $this->belongsTo(User::class, 'uploaded_by');
+        return $this->belongsTo(User::class, 'uploaded_by')->select('username');
     }
 
     public function comments()
@@ -33,5 +33,9 @@ class Document extends Model
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'uploaded_by', 'id');
     }
 }

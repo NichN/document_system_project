@@ -31,11 +31,11 @@
   <div class="container-detail">
     <a href="{{ route('document') }}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back</a>
 
-    <h1 class="text-center">Software Engineering</h1>
+    <h1 class="text-center">{{ $document->title }}</h1>
 
     <img src="{{ asset('image/doc.png') }}" alt="Image description" class="img-responsive center-block">
-    <p class="text-center">This page provides details about the selected document. Explore the content, and feel free to
-      leave your comments below.</p>
+    <p class="text-center">{{ $document->description }}</p>
+    <p class="text-center">by: {{ $document->uploader->username}}</p>
 
     <div class="comment-section">
       <h3>Leave a Comment:</h3>
