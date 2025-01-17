@@ -8,14 +8,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 
   <title>Document</title>
   <style>
     .navbar {
       background-color: #3498db;
-      /* Light background */
       border: none;
       padding: 20px 30px;
     }
@@ -40,7 +37,6 @@
 
     .img-logo {
       max-height: 40px;
-      /* Restrict the logo height */
     }
 
     .user-info {
@@ -59,111 +55,35 @@
 
     .menu-toggle {
       font-size: 1.5rem;
-      margin-left: 10px;
       cursor: pointer;
-    }
-
-    .image-container h1 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-      color: #fff;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    }
-
-    .card {
-      width: 270px;
-      margin-top: 30px;
-      border: none;
-      border-radius: 8px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-    }
-
-    .container {
-      margin-top: 50px;
-    }
-
-    .hidden {
-      display: none;
-      /* Initially hidden */
+      color: #ffffff;
     }
 
     .dropdown-menu {
       min-width: 200px;
-      /* Adjust width */
       padding: 10px 0;
-      /* Spacing inside the dropdown */
       background-color: #ffffff;
-      /* White background */
       border-radius: 8px;
-      /* Rounded corners */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      /* Subtle shadow */
       position: absolute;
-      /* Position dropdown */
       top: 50px;
-      /* Adjust positioning relative to icon */
       right: 0;
-      /* Align dropdown to the right */
       z-index: 1000;
-      /* Ensure it appears above other elements */
       list-style: none;
-      /* Remove bullet points */
     }
 
     .dropdown-menu li a {
       color: #333333;
-      /* Neutral text color */
       padding: 10px 20px;
-      /* Add padding around links */
       display: block;
-      /* Full width clickable */
       text-decoration: none;
-      /* Remove underlines */
       font-size: 14px;
-      /* Slightly larger font */
       transition: background-color 0.3s, color 0.3s;
-      /* Smooth hover effects */
     }
 
     .dropdown-menu li a:hover {
       background-color: #f1f1f1;
-      /* Light background on hover */
       color: #007bff;
-      /* Accent color */
-    }
-
-
-
-
-    .dropdown-menu li {
-      list-style: none;
-      /* Remove bullet points */
-    }
-
-
-
-    .menu-toggle {
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #ffffff;
-      /* White color for the icon */
-    }
-
-    .hidden {
-      display: none;
-      /* Initially hide the dropdown */
-    }
-
-    .dropdown-menu-right {
-      right: 0;
-      left: auto;
-      /* Align menu to the right */
     }
 
     footer {
@@ -231,38 +151,29 @@
               }
 
               const users = await response.json(); // Expecting an array of users
-              console.log("Fetched users:", users); // Debugging API response
 
-              // Identify the logged-in user (replace 'id' with a proper identifier, if necessary)
-              const loggedInUser = users.find(user => user.role === 'Super Admin'); // Example: find user by role
+              const loggedInUser = users.find(user => user.role === 'Super Admin' || user.role === 'Admin' || user.role === 'Teacher' || user.role === 'Student');
               if (!loggedInUser) {
-                console.error("No matching user found.");
-                navbarSetting.innerHTML = `
-                          <li><a href="{{ route('login') }}">Login</a></li>`;
+                navbarSetting.innerHTML = `<li><a href="{{ route('login') }}">Login</a></li>`;
                 return;
               }
 
               const username = loggedInUser.username || "Unknown User";
               const role = loggedInUser.role || "Guest";
 
-              let menuHTML = `
-                      <span>${username}</span>
-                      <a class="menu-toggle" onclick="toggleMenu()">
-                          <i class="fa-solid fa-bars"></i>
-                      </a>
-                      <ul id="menuItems" class="hidden">`;
+              let menuHTML = `<span>${username}</span><a class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></a><ul id="menuItems" class="hidden">`;
+
               if (role === 'Super Admin') {
                 menuHTML += `
-                          <li><a href="{{ route('adminlist') }}">Admin</a></li>
-                          <li><a href="{{ route('teacherlist') }}">Teacher</a></li>
-                          <li><a href="#" onclick="logout()">Logout</a></li>`;
+                  <li><a href="{{ route('adminlist') }}">Admin</a></li>
+                  <li><a href="{{ route('teacherlist') }}">Teacher</a></li>
+                  <li><a href="#" onclick="logout()">Logout</a></li>`;
               } else if (role === 'Admin') {
                 menuHTML += `
-                          <li><a href="{{ route('teacherlist') }}">Teacher</a></li>
-                          <li><a href="#" onclick="logout()">Logout</a></li>`;
+                  <li><a href="{{ route('teacherlist') }}">Teacher</a></li>
+                  <li><a href="#" onclick="logout()">Logout</a></li>`;
               } else if (role === 'Teacher' || role === 'Student') {
-                menuHTML += `
-                          <li><a href="#" onclick="logout()">Logout</a></li>`;
+                menuHTML += `<li><a href="#" onclick="logout()">Logout</a></li>`;
               }
 
               menuHTML += `</ul>`;
@@ -271,8 +182,7 @@
               console.error("Error fetching user data:", error);
             }
           } else {
-            navbarSetting.innerHTML = `
-                  <li><a href="{{ route('login') }}">Login</a></li>`;
+            navbarSetting.innerHTML = `<li><a href="{{ route('login') }}">Login</a></li>`;
           }
         });
 
@@ -285,7 +195,6 @@
           const menu = document.getElementById('menuItems');
           const toggleButton = document.querySelector('.menu-toggle');
 
-          // Close dropdown if clicked outside
           if (menu && !menu.contains(event.target) && !toggleButton.contains(event.target)) {
             menu.classList.add('hidden');
           }
@@ -301,8 +210,6 @@
   </nav>
   <div class="image-container">
     <img class="img-bg" src="{{ asset('image/norton_bg.jpg')}}" alt="Background">
-    <div class="dark-overlay">
-    </div>
     <h1 class="image-title">Document Feature</h1>
   </div>
   <form class="navbar-form navbar-left" role="search">
@@ -331,32 +238,23 @@
         </div>
       </div>
       </div>
-
     @endforeach
     </div>
   </div>
   <script>
     function searchDocuments() {
-      // Get the search input value
       const query = document.getElementById('searchBox').value.toLowerCase();
-
-      // Get all document cards
       const cards = document.querySelectorAll('.col-md-3');
-
-      // Loop through each card
       cards.forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
         const description = card.getAttribute('data-description').toLowerCase();
-
-        // Check if the search query matches the title or description
         if (title.includes(query) || description.includes(query)) {
-          card.style.display = ''; // Show the card
+          card.style.display = '';
         } else {
-          card.style.display = 'none'; // Hide the card
+          card.style.display = 'none';
         }
       });
     }
-
   </script>
   <footer>
     <div class="info">
