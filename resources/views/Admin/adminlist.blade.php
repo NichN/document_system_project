@@ -1,7 +1,7 @@
 <!-- filepath: /Users/sunnasy/Desktop/Co4_ES1/Software Engineering/document_system_project/resources/views/Admin/adminlist.blade.php -->
 @extends('Layouts.app')
 
-@section('title', 'Admin List')
+@section('title', 'Users List')
 
 @section('content')
 <h1>Admin List</h1>
@@ -27,7 +27,7 @@
             return;
         }
 
-        fetch("http://localhost:8000/api/auth/get-users",{
+        fetch("http://localhost:8000/api/auth/get-users", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -46,7 +46,11 @@
                     throw new Error("Unexpected response format");
                 }
                 const adminList = document.getElementById("admin-list");
-                data.forEach(user => {
+
+                // Filter only users with the role "Admin"
+                const admins = data.filter(user => user.role === 'Admin');
+
+                admins.forEach(user => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
                     <td>${user.id}</td>
@@ -66,6 +70,7 @@
                 alert("Failed to fetch admin list.");
             });
     });
+
 
 
 
