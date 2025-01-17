@@ -38,8 +38,8 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("addAdminForm").addEventListener("submit", async function (event) {
-            event.preventDefault(); 
-            
+            event.preventDefault();
+
             const username = document.getElementById("username").value;
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -55,7 +55,7 @@
 
             try {
                 // Send a POST request to the API
-                const response = await fetch("http://localhost:8000/api/auth/add-user", {
+                const response = await fetch("http://localhost:3000/api/auth/add-user", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json", // Set content type
