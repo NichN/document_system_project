@@ -62,7 +62,8 @@
   <script>
     // Load comments for the document
     async function loadComments() {
-      const documentId = 2; // The document ID you're interested in
+      const documentId = {{ $document->id }};
+      // The document ID you're interested in
       const apiUrl = `http://127.0.0.1:3000/api/comments/${documentId}`;
       const authToken = localStorage.getItem('authToken');
 
@@ -143,7 +144,7 @@
         return;
       }
 
-      const documentId = 2; // The document ID you're submitting the comment for
+      const documentId = {{ $document->id }};
       const apiUrl = 'http://127.0.0.1:3000/api/comments';
 
       // Get the JWT token from localStorage or sessionStorage
