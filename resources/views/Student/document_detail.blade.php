@@ -228,8 +228,8 @@
       }
     }
 
-    async function downloadDocument(documentId) {
-      const apiUrl = `http://127.0.0.1:3000/api/documents/${documentId}/download`;
+   aaaaaaa async function downloadDocument(documentId) {
+      const apiUrl = `http://localhost:8000/api/documents/${documentId}/download`;
 
       try {
         const response = await fetch(apiUrl, {

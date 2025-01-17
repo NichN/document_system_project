@@ -56,10 +56,8 @@ class DocumentController extends Controller
     }
     public function display($id)
 {
-    // Fetch the document using the ID
     $document = Document::findOrFail($id);
-
-    // Return the document details view
+    
     return view('Student.document_detail', compact('document'));
 }
     public function edit($id)

@@ -179,7 +179,7 @@
 
           if (token) {
             try {
-              const response = await fetch("http://127.0.0.1:3000/api/auth/get-users", {
+              const response = await fetch("http://localhost:8000/api/auth/get-users", {
                 method: "GET",
                 headers: {
                   "Authorization": `Bearer ${token}`,
@@ -280,7 +280,7 @@
 
     function fetchDocuments() {
       const token = localStorage.getItem('authToken');
-      fetch("http://127.0.0.1:3000/api/documents", {
+      fetch("http://localhost:8000/api/documents", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -328,22 +328,17 @@
     }
 
     function searchDocuments() {
-      // Get the search input value
       const query = document.getElementById('searchBox').value.toLowerCase();
-
-      // Get all document cards
       const cards = document.querySelectorAll('.col-md-3');
 
-      // Loop through each card
       cards.forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
         const description = card.getAttribute('data-description').toLowerCase();
 
-        // Check if the search query matches the title or description
         if (title.includes(query) || description.includes(query)) {
-          card.style.display = ''; // Show the card
+          card.style.display = '';
         } else {
-          card.style.display = 'none'; // Hide the card
+          card.style.display = 'none';
         }
       });
     }
