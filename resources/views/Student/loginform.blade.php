@@ -27,16 +27,16 @@
 
     <script>
         document.getElementById("loginForm").addEventListener("submit", async function (event) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
             try {
-                const response = await fetch("http://localhost:8000/api/auth/login", {
+                const response = await fetch("http://localhost:3000/api/auth/login", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json", 
+                        "Content-Type": "application/json",
                         "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
                     },
                     body: JSON.stringify({ email, password })
@@ -60,4 +60,5 @@
         });
     </script>
 </body>
+
 </html>
