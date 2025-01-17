@@ -6,10 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CommentController;
-<<<<<<< HEAD
-=======
 
->>>>>>> 3fa79543bc0cd52166f6eb9ac1562e2f7d145762
 /*
 |--------------------------------------------------------------------------
 | Web Routes
