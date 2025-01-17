@@ -158,6 +158,48 @@
       left: auto;
       /* Align menu to the right */
     }
+
+    .truncated-description {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      /* Number of lines to display */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+
+    footer {
+      width: 100%;
+      height: 120px;
+      background-color: #3498db;
+      margin-top: 50px;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+    }
+
+    footer .info {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    footer .info a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: black;
+      text-decoration: none;
+    }
+
+    .bootom-text {
+      justify-content: space-between;
+      display: flex;
+    }
   </style>
 
 </head>
@@ -274,6 +316,7 @@
   <script>
 
 
+
     document.addEventListener("DOMContentLoaded", function () {
       fetchDocuments();
     });
@@ -316,7 +359,11 @@
         <div class="card">
           <div class="card-body mt-3">
             <h4 class="card-title text-primary text-center"><strong>${doc.title}</strong></h4>
-            <p class="card-text text-center">${doc.description}</p>
+            <p class="card-title text-primary text-center truncated-description" id="description" style="color:black"> ${doc.description}
+</p>
+<button id="toggleDescription" class="btn btn-link" style="display: none;">Read More</button>
+
+            <p class="card-text text-center"></p>
             <p class="text-center" style="color:brown">by: ${doc.created_by}</p>
             <a href="/document/detail/${doc.id}" target="_self">
               <button type="button" class="btn btn-primary btn-block">View</button>
@@ -326,6 +373,29 @@
       </div>`;
       });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const descriptionElement = document.getElementById('description');
+      const toggleButton = document.getElementById('toggleDescription');
+
+      if (descriptionElement) {
+        const fullDescription = descriptionElement.textContent.trim();
+        const maxLength = 100;
+
+        if (fullDescription.length > maxLength) {
+          // Initially truncate the text
+          const truncatedDescription = fullDescription.slice(0, maxLength) + '...';
+          descriptionElement.textContent = truncatedDescription;
+          toggleButton.style.display = 'inline'; // Show the toggle button
+        }
+
+        toggleButton.addEventListener('click', () => {
+          const isTruncated = descriptionElement.textContent.endsWith('...');
+          descriptionElement.textContent = isTruncated ? fullDescription : fullDescription.slice(0, maxLength) + '...';
+          toggleButton.textContent = isTruncated ? 'Show Less' : 'Read More';
+        });
+      }
+    });
 
     function searchDocuments() {
       const query = document.getElementById('searchBox').value.toLowerCase();

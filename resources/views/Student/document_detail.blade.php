@@ -62,8 +62,14 @@
   <script>
     // Load comments for the document
     async function loadComments() {
+<<<<<<< HEAD
       const documentId = 2; // The document ID you're interested in
       const apiUrl = `http://localhost:8000/api/comments/${documentId}`;
+=======
+      const documentId = {{ $document->id }};
+      // The document ID you're interested in
+      const apiUrl = `http://127.0.0.1:3000/api/comments/${documentId}`;
+>>>>>>> 285c3137c6f4cb2de3a3491b60cd676eeb3d4967
       const authToken = localStorage.getItem('authToken');
 
       if (!authToken) {
@@ -143,8 +149,13 @@
         return;
       }
 
+<<<<<<< HEAD
       const documentId = 2; // The document ID you're submitting the comment for
       const apiUrl = 'http://localhost:8000/api/comments';
+=======
+      const documentId = {{ $document->id }};
+      const apiUrl = 'http://127.0.0.1:3000/api/comments';
+>>>>>>> 285c3137c6f4cb2de3a3491b60cd676eeb3d4967
 
       // Get the JWT token from localStorage or sessionStorage
       const token = localStorage.getItem('authToken'); // or use sessionStorage
