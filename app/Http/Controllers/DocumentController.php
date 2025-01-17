@@ -25,24 +25,20 @@ class DocumentController extends Controller
         'title' => 'required|string|max:255',
         'description' => 'nullable|string',
         'type' => 'required|string|in:Books,Exam Paper,Questions,Knowledge',
-        'file_path' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',  // Validate file type and size
+        'file_path' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048', 
     ]);
-
-    // Handle file upload
     if ($request->hasFile('file_path')) {
-        // Store the file in storage/app/public/documents/
         $filePath = $request->file('file_path')->store('documents', 'public');
     } else {
         return back()->with('error', 'No file selected.');
     }
 
-    // Create a new document record in the database
     $document = Document::create([
         'title' => $request->title,
         'description' => $request->description,
         'type' => $request->type,
-        'file_path' => $filePath,  // Store the file path
-        'uploaded_by' => auth()->id(),  // Get the ID of the authenticated user
+        'file_path' => $filePath,  
+        'uploaded_by' => auth()->id(), 
     ]);
 
     return response()->json(['status' => 'success', 'message' => 'Document uploaded successfully', 'document' => $document], 201);
@@ -56,6 +52,14 @@ class DocumentController extends Controller
         }
         return response()->json(['status' => 'success', 'document' => $document], 200);
     }
+    public function display($id)
+{
+    // Fetch the document using the ID
+    $document = Document::findOrFail($id);
+
+    // Return the document details view
+    return view('Student.document_detail', compact('document'));
+}
     public function edit($id)
     {
         $document = Document::findOrFail($id);

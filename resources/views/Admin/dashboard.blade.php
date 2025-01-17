@@ -12,7 +12,6 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Type</th>
-                <th>Document</th>
                 <th>Uploaded By</th>
                 <th>Created At</th>
                 <th>Updated At</th>
@@ -68,7 +67,6 @@
                 <td>${doc.title}</td>
                 <td>${doc.description}</td>
                 <td>${doc.type}</td>
-                <td><a href="/storage/${doc.file_path}" target="_blank">View Document</a></td>
                 <td>${doc.uploaded_by}</td>
                 <td>${new Date(doc.created_at).toLocaleString()}</td>
                 <td>${new Date(doc.updated_at).toLocaleString()}</td>

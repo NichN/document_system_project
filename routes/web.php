@@ -1,12 +1,11 @@
 <?php
-
+namespace App\Models;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\cardcontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\DocumentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,7 +84,8 @@ Route::post('/document/detail/{documentId}', [CommentController::class, 'store']
 Route::get('/create_document', [DocumentController::class, 'store'])->name('upload_document');
 Route::get('/edit_document/{id}', [DocumentController::class, 'edit'])->name('edit_document');
 Route::put('/edit_document/{id}', [DocumentController::class, 'update'])->name('update_document');
-Route::get('document/{id}', [DocumentController::class, 'show'])->name('document.detail');
+/*Route::get('/document/detail/{id}', [DocumentController::class, 'show'])->name('Student.document_detail');*/
+
 Route::delete('/documents_delete/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 
 Route::get('/dashboard', function () {

@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\DocumentController;
 use Illuminate\Http\Request;
+use App\Models\Document;
 
 class cardcontroller extends Controller
 {
