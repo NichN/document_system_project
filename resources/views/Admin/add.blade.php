@@ -57,7 +57,7 @@
         formData.append("title", title);
         formData.append("description", description);
         formData.append("type", type);
-        formData.append("document", documentFile);
+        formData.append("file_path", documentFile);
 
         try {
             const response = await fetch("http://localhost:8000/api/documents/upload", {

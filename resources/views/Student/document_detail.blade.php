@@ -200,7 +200,6 @@
       }
     }
 
-    // Function to delete comment
     async function deleteComment(commentId) {
       if (!confirm('Are you sure you want to delete this comment?')) return;
 
@@ -218,7 +217,7 @@
           throw new Error('Failed to delete comment');
         }
 
-        loadComments(); // Reload comments after deletion
+        loadComments();
       } catch (error) {
         console.error('Error deleting comment:', error);
       }
