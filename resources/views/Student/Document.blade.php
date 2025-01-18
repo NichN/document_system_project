@@ -323,7 +323,7 @@
 
     function fetchDocuments() {
       const token = localStorage.getItem('authToken');
-      fetch("http://localhost:8000/api/documents", {
+      fetch("http://localhost:3000/api/documents", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
