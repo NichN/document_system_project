@@ -9,201 +9,9 @@
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
+  <link rel="stylesheet" href="{{ asset('css/document.css') }}">
   <title>Document</title>
-  <style>
-    .navbar {
-      background-color: #3498db;
-      /* Light background */
-      border: none;
-      padding: 20px 30px;
-    }
-
-    .image-container {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .img-bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-
-    .dark-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 2;
-    }
-
-    .image-container h1 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-      color: #fff;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    }
-
-    .card {
-      width: 270px;
-      margin-top: 30px;
-      border: none;
-      border-radius: 8px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-    }
-
-    .container {
-      margin-top: 50px;
-    }
-
-
-    .img-logo {
-      max-height: 40px;
-      /* Restrict the logo height */
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-    }
-
-    .user-info .menu-toggle {
-      margin-left: 10px;
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .menu-toggle {
-      font-size: 1.5rem;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-
-    .dropdown-menu {
-      min-width: 200px;
-      /* Adjust width for better visibility */
-      padding: 10px 0;
-      /* Add spacing inside the dropdown */
-      background-color: #ffffff;
-      /* White background for a clean look */
-      border-radius: 8px;
-      /* Rounded corners */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      /* Subtle shadow for depth */
-      border: none;
-      /* Remove the border */
-    }
-
-    .dropdown-menu li {
-      list-style: none;
-      /* Remove bullet points */
-    }
-
-    .dropdown-menu li a {
-      color: #333333;
-      /* Neutral text color */
-      padding: 10px 20px;
-      /* Add padding around links */
-      display: block;
-      /* Make the link cover the entire clickable area */
-      text-decoration: none;
-      /* Remove underlines */
-      font-size: 14px;
-      /* Slightly larger font for readability */
-      transition: background-color 0.3s, color 0.3s;
-      /* Smooth hover effects */
-    }
-
-    .dropdown-menu li a:hover {
-      background-color: #f1f1f1;
-      /* Light background on hover */
-      color: #007bff;
-      /* Accent color on hover */
-    }
-
-    .menu-toggle {
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #ffffff;
-      /* White color for the icon */
-    }
-
-    .hidden {
-      display: none;
-      /* Initially hide the dropdown */
-    }
-
-    .dropdown-menu-right {
-      right: 0;
-      left: auto;
-      /* Align menu to the right */
-    }
-
-    .truncated-description {
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      /* Number of lines to display */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: normal;
-    }
-
-    footer {
-      width: 100%;
-      height: 120px;
-      background-color: #3498db;
-      margin-top: 50px;
-      padding: 20px 0;
-      text-align: center;
-      color: white;
-    }
-
-    footer .info {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    footer .info a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: black;
-      text-decoration: none;
-    }
-
-    .bootom-text {
-      justify-content: space-between;
-      display: flex;
-    }
-  </style>
-
 </head>
-
 <body>
   <nav class="navbar">
     <img class="img-logo" src="{{asset('image/Norton.png')}}" alt="Logo">
@@ -233,11 +41,10 @@
                 throw new Error("Failed to fetch user data.");
               }
 
-              const users = await response.json(); // Expecting an array of users
-              console.log("Fetched users:", users); // Debugging API response
+              const users = await response.json();
+              console.log("Fetched users:", users);
 
-              // Identify the logged-in user (replace 'id' with a proper identifier, if necessary)
-              const loggedInUser = users.find(user => user.role === 'Super Admin'); // Example: find user by role
+              const loggedInUser = users.find(user => user.role === 'Super Admin');
               if (!loggedInUser) {
                 console.error("No matching user found.");
                 navbarSetting.innerHTML = `
@@ -307,23 +114,16 @@
   <div class="container mt-5">
     <h1 class="text-center">Document Viewer</h1>
     <div id="documentContainer" class="row">
-      <!-- Documents will be dynamically loaded here -->
     </div>
   </div>
-
-
-
   <script>
-
-
-
     document.addEventListener("DOMContentLoaded", function () {
       fetchDocuments();
     });
 
     function fetchDocuments() {
       const token = localStorage.getItem('authToken');
-      fetch("http://localhost:3000/api/documents", {
+      fetch("http://localhost:8000/api/documents", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -352,41 +152,35 @@
     }
 
     function renderDocuments(documents, container) {
-      container.innerHTML = ""; // Clear previous content
+      container.innerHTML = "";
       documents.forEach(doc => {
         container.innerHTML += `
       <div class="col-md-3" data-title="${doc.title.toLowerCase()}" data-description="${doc.description.toLowerCase()}">
         <div class="card">
           <div class="card-body mt-3">
             <h4 class="card-title text-primary text-center"><strong>${doc.title}</strong></h4>
-            <p class="card-title text-primary text-center truncated-description" id="description" style="color:black"> ${doc.description}
-</p>
-<button id="toggleDescription" class="btn btn-link" style="display: none;">Read More</button>
-
+            <p class="card-title text-primary text-center truncated-description" id="description" style="color:black"> ${doc.description}</p>
+            <button id="toggleDescription" class="btn btn-link" style="display: none;">Read More</button>
             <p class="card-text text-center"></p>
-            <p class="text-center" style="color:brown">by: ${doc.created_by}</p>
+            <p class="text-center" style="color:brown">upload by: ${doc.uploaded_by}</p>
             <a href="/document/detail/${doc.id}" target="_self">
-              <button type="button" class="btn btn-primary btn-block">View</button>
+               <button type="button" class="btn btn-primary btn-block" onclick="viewDocument(${doc.id})">View</button>
             </a>
           </div>
         </div>
       </div>`;
       });
     }
-
     document.addEventListener('DOMContentLoaded', function () {
       const descriptionElement = document.getElementById('description');
       const toggleButton = document.getElementById('toggleDescription');
-
       if (descriptionElement) {
         const fullDescription = descriptionElement.textContent.trim();
         const maxLength = 100;
-
         if (fullDescription.length > maxLength) {
-          // Initially truncate the text
           const truncatedDescription = fullDescription.slice(0, maxLength) + '...';
           descriptionElement.textContent = truncatedDescription;
-          toggleButton.style.display = 'inline'; // Show the toggle button
+          toggleButton.style.display = 'inline';
         }
 
         toggleButton.addEventListener('click', () => {
@@ -424,5 +218,4 @@
     <p style="margin-top: 20px;">Copyright © Norton University</p>
   </footer>
 </body>
-
 </html>

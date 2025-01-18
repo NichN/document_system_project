@@ -27,7 +27,7 @@
             return;
         }
 
-        fetch("http://localhost:3000/api/auth/get-users", {
+        fetch("http://localhost:8000/api/auth/get-users", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -86,7 +86,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/api/auth/delete/${userId}`, {
+        fetch(`http://localhost:8000/api/auth/delete/${userId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`,

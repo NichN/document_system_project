@@ -112,7 +112,5 @@ function deleteDocument(id) {
         alert("Failed to delete document.");
     });
 }
-
-
 </script>
 @endsection

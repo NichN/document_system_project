@@ -55,7 +55,7 @@
 
             try {
                 // Send a POST request to the API
-                const response = await fetch("http://localhost:3000/api/auth/add-user", {
+                const response = await fetch("http://localhost:8000/api/auth/add-user", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json", // Set content type
